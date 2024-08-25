@@ -1,0 +1,14 @@
+Help file for PSProfileManager module
+-------------------------------------
+
+Function: New-PSGlobalProfile
+Syntax: 
+  New-PSGlobalProfile [-Force] [-Verbose]
+Description:
+  Creates a new PowerShell profile if one does not exist.
+  
+  -Force:
+    Forces the creation of a new profile script without confirmation.
+  
+  -Verbose:
+    Provides detailed output of the process.
