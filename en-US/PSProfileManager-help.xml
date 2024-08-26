@@ -3,27 +3,22 @@
                    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
                    xmlns:dev="http://schemas.microsoft.com/maml/dev/command/2004/10">
     <command:details>
-      <command:name>New-PSGlobalProfile</command:name>
+      <command:name>New-PSProfile</command:name>
       <command:verb>New</command:verb>
-      <command:noun>PSGlobalProfile</command:noun>
+      <command:noun>PSProfile</command:noun>
       <command:description>
         <maml:para>Creates a new PowerShell profile if one does not exist.</maml:para>
       </command:description>
     </command:details>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>New-PSGlobalProfile</maml:name>
+        <maml:name>New-PSProfile</maml:name>
         <command:parameter>
           <maml:name>-Force</maml:name>
           <maml:description>
             <maml:para>Forces the creation of a new profile script without confirmation.</maml:para>
           </maml:description>
         </command:parameter>
-        <command:parameter>
-          <maml:name>-Verbose</maml:name>
-          <maml:description>
-            <maml:para>Provides detailed output of the process.</maml:para>
-          </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:description>
@@ -32,12 +27,12 @@
     <command:examples>
       <command:example>
         <command:title>Example 1: Create a new profile</command:title>
-        <maml:code>New-PSGlobalProfile</maml:code>
+        <maml:code>New-PSProfile</maml:code>
         <maml:remarks>This command creates a new PowerShell profile if it does not already exist.</maml:remarks>
       </command:example>
       <command:example>
         <command:title>Example 2: Force create a new profile</command:title>
-        <maml:code>New-PSGlobalProfile -Force</maml:code>
+        <maml:code>New-PSProfile -Force</maml:code>
         <maml:remarks>This command forces the creation of a new PowerShell profile, overwriting any existing profile.</maml:remarks>
       </command:example>
     </command:examples>
@@ -59,8 +54,8 @@
     </command:outputTypes>
     <command:relatedLinks>
       <command:navigationLink>
-        <maml:linkText>Test-PSGlobalProfile</maml:linkText>
-        <maml:uri>#Test-PSGlobalProfile</maml:uri>
+        <maml:linkText>Test-PSProfile</maml:linkText>
+        <maml:uri>#Test-PSProfile</maml:uri>
       </command:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -68,16 +63,16 @@
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
                    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
     <command:details>
-      <command:name>Test-PSGlobalProfile</command:name>
+      <command:name>Test-PSProfile</command:name>
       <command:verb>Test</command:verb>
-      <command:noun>PSGlobalProfile</command:noun>
+      <command:noun>PSProfile</command:noun>
       <command:description>
         <maml:para>Checks if a PowerShell profile exists.</maml:para>
       </command:description>
     </command:details>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Test-PSGlobalProfile</maml:name>
+        <maml:name>Test-PSProfile</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:description>
@@ -86,7 +81,7 @@
     <command:examples>
       <command:example>
         <command:title>Example 1: Test if a profile exists</command:title>
-        <maml:code>Test-PSGlobalProfile</maml:code>
+        <maml:code>Test-PSProfile</maml:code>
         <maml:remarks>This command checks if a PowerShell profile exists.</maml:remarks>
       </command:example>
     </command:examples>
@@ -111,16 +106,16 @@
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
                    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
     <command:details>
-      <command:name>Set-PSGlobalProfile</command:name>
+      <command:name>Set-PSProfileSource</command:name>
       <command:verb>Set</command:verb>
-      <command:noun>PSGlobalProfile</command:noun>
+      <command:noun>PSProfileSource</command:noun>
       <command:description>
         <maml:para>Sets the source of the PowerShell profile, either from a URL or local path.</maml:para>
       </command:description>
     </command:details>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-PSGlobalProfile</maml:name>
+        <maml:name>Set-PSProfileSource</maml:name>
         <command:parameter>
           <maml:name>-Url</maml:name>
           <maml:description>
@@ -133,25 +128,20 @@
             <maml:para>The local file path to the profile.</maml:para>
           </maml:description>
         </command:parameter>
-        <command:parameter>
-          <maml:name>-Verbose</maml:name>
-          <maml:description>
-            <maml:para>Provides detailed output of the process.</maml:para>
-          </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:description>
-      <maml:para>This command sets the source for the PowerShell profile, either from a URL or a local file path.</maml:para>
+      <maml:para>This command sets the source of the PowerShell profile, either from a URL or a local file path.</maml:para>
     </command:description>
     <command:examples>
       <command:example>
         <command:title>Example 1: Set profile source to a URL</command:title>
-        <maml:code>Set-PSGlobalProfile -Url "https://github.com/user/repo/profile.ps1"</maml:code>
+        <maml:code>Set-PSProfileSource -Url "https://github.com/user/repo/profile.ps1"</maml:code>
         <maml:remarks>This command sets the profile source to a URL.</maml:remarks>
       </command:example>
       <command:example>
         <command:title>Example 2: Set profile source to a local file</command:title>
-        <maml:code>Set-PSGlobalProfile -LocalPath "C:\Path\To\Profile.ps1"</maml:code>
+        <maml:code>Set-PSProfileSource -LocalPath "C:\Path\To\Profile.ps1"</maml:code>
         <maml:remarks>This command sets the profile source to a local file path.</maml:remarks>
       </command:example>
     </command:examples>
@@ -176,16 +166,16 @@
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
                    xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
     <command:details>
-      <command:name>Load-PSGlobalProfile</command:name>
-      <command:verb>Load</command:verb>
-      <command:noun>PSGlobalProfile</command:noun>
+      <command:name>Import-PSProfile</command:name>
+      <command:verb>Import</command:verb>
+      <command:noun>PSProfile</command:noun>
       <command:description>
         <maml:para>Loads the profile from the specified source and applies it to the current session.</maml:para>
       </command:description>
     </command:details>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Load-PSGlobalProfile</maml:name>
+        <maml:name>Import-PSProfile</maml:name>
         <command:parameter>
           <maml:name>-FromUrl</maml:name>
           <maml:description>
@@ -193,122 +183,4 @@
           </maml:description>
         </command:parameter>
         <command:parameter>
-          <maml:name>-FromLocal</maml:name>
-          <maml:description>
-            <maml:para>Loads the profile from the stored local path.</maml:para>
-          </command:description>
-        </command:parameter>
-        <command:parameter>
-          <maml:name>-Overwrite</maml:name>
-          <maml:description>
-            <maml:para>Overwrites the existing profile with the new content.</maml:para>
-          </command:description>
-        </command:parameter>
-        <command:parameter>
-          <maml:name>-Append</maml:name>
-          <maml:description>
-            <maml:para>Appends the new content to the existing profile.</maml:para>
-          </command:description>
-        </command:parameter>
-        <command:parameter>
-          <maml:name>-Reload</maml:name>
-          <maml:description>
-            <maml:para>Reloads the profile into the current session.</maml:para>
-          </command:description>
-        </command:parameter>
-        <command:parameter>
-          <maml:name>-Backup</maml:name>
-          <maml:description>
-            <maml:para>Backs up the existing profile before making changes.</maml:para>
-          </command:description>
-        </command:parameter>
-        <command:parameter>
-          <maml:name>-Verbose</maml:name>
-          <maml:description>
-            <maml:para>Provides detailed output of the process.</maml:para>
-          </command:description>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:description>
-      <maml:para>This command loads a profile from the specified source and applies it to the current session.</maml:para>
-    </command:description>
-    <command:examples>
-      <command:example>
-        <command:title>Example 1: Load a profile from a URL</command:title>
-        <maml:code>Load-PSGlobalProfile -FromUrl</maml:code>
-        <maml:remarks>This command loads a profile from the stored URL and applies it to the current session.</maml:remarks>
-      </command:example>
-      <command:example>
-        <command:title>Example 2: Load and reload a profile from a local path</command:title>
-        <maml:code>Load-PSGlobalProfile -FromLocal -Reload</maml:code>
-        <maml:remarks>This command loads a profile from the stored local path, applies it to the current session, and reloads it.</maml:remarks>
-      </command:example>
-    </command:examples>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:typeName>None</dev:typeName>
-        <dev:description>
-          <maml:para>This command does not take any pipeline input.</maml:para>
-        </dev:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:outputTypes>
-      <command:outputType>
-        <dev:typeName>None</dev:typeName>
-        <dev:description>
-          <maml:para>This command does not return any output.</maml:para>
-        </dev:description>
-      </command:outputType>
-    </command:outputTypes>
-  </command:command>
-
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
-                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
-    <command:details>
-      <command:name>Backup-PSGlobalProfile</command:name>
-      <command:verb>Backup</command:verb>
-      <command:noun>PSGlobalProfile</command:noun>
-      <command:description>
-        <maml:para>Backs up the existing PowerShell profile before making changes.</maml:para>
-      </command:description>
-    </command:details>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Backup-PSGlobalProfile</maml:name>
-        <command:parameter>
-          <maml:name>-Verbose</maml:name>
-          <maml:description>
-            <maml:para>Provides detailed output of the process.</maml:para>
-          </command:description>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:description>
-      <maml:para>This command backs up the existing PowerShell profile to a timestamped file.</maml:para>
-    </command:description>
-    <command:examples>
-      <command:example>
-        <command:title>Example 1: Backup an existing profile</command:title>
-        <maml:code>Backup-PSGlobalProfile</maml:code>
-        <maml:remarks>This command creates a backup of the existing PowerShell profile with a timestamp.</maml:remarks>
-      </command:example>
-    </command:examples>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:typeName>None</dev:typeName>
-        <dev:description>
-          <maml:para>This command does not take any pipeline input.</maml:para>
-        </dev:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:outputTypes>
-      <command:outputType>
-        <dev:typeName>None</dev:typeName>
-        <dev:description>
-          <maml:para>This command does not return any output.</maml:para>
-        </dev:description>
-      </command:outputType>
-    </command:outputTypes>
-  </command:command>
-</helpItems>
+          <m

@@ -3,7 +3,7 @@
     RootModule = 'PSProfileManager.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.0.2'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop', 'Core')
@@ -48,7 +48,7 @@
     NestedModules = @()
 
     # Functions to export from this module
-    FunctionsToExport = @('New-PSGlobalProfile', 'Test-PSGlobalProfile', 'Set-PSGlobalProfile', 'Load-PSGlobalProfile', 'Backup-PSGlobalProfile')
+    FunctionsToExport = @('New-PSProfile', 'Test-PSProfile', 'Set-PSProfileSource', 'Import-PSProfile', 'Backup-PSProfile')
 
     # Cmdlets to export from this module
     CmdletsToExport = @()
@@ -62,9 +62,6 @@
     # DSC resources to export from this module
     DscResourcesToExport = @()
 
-    # List of all modules packaged with this module
-    ModuleList = @()
-
     # List of all files packaged with this module
     FileList = @('PSProfileManager.psm1', 'LICENSE', 'README.md', 'en-US\PSProfileManager-help.xml', 'en-US\PSProfileManager-help.txt')
 
@@ -72,11 +69,8 @@
     PrivateData = @{}
 
     # Help info URI for this module
-    HelpInfoURI = ''
+    HelpInfoURI = 'https://github.com/Kalichuza/PSProfileManager'
 
     # Default prefix to apply to commands exported from this module.
     DefaultCommandPrefix = ''
-
-    # Localization info for this module
-    RootModuleResourceUri = 'en-US\PSProfileManager-help.xml'
 }

@@ -1,14 +1,13 @@
 # PSProfileManager Module
 
-# New-PSGlobalProfile function
-function New-PSGlobalProfile {
+# New-PSGlobalProfile function -> Rename to New-PSProfile
+function New-PSProfile {
     [CmdletBinding()]
     param (
-        [switch]$Force,
-        [switch]$Verbose
+        [switch]$Force
     )
 
-    if (Test-PSGlobalProfile) {
+    if (Test-PSProfile) {
         if (-not $Force) {
             Write-Warning "Profile already exists. Use -Force to overwrite."
             return
@@ -16,13 +15,11 @@ function New-PSGlobalProfile {
     }
 
     New-Item -Path $PROFILE -ItemType File -Force
-    if ($Verbose) {
-        Write-Verbose "New profile created at $PROFILE"
-    }
+    Write-Verbose "New profile created at $PROFILE"
 }
 
-# Test-PSGlobalProfile function
-function Test-PSGlobalProfile {
+# Test-PSGlobalProfile function -> Rename to Test-PSProfile
+function Test-PSProfile {
     [CmdletBinding()]
     param ()
 
@@ -35,29 +32,24 @@ function Test-PSGlobalProfile {
     }
 }
 
-# Set-PSGlobalProfile function
-function Set-PSGlobalProfile {
+# Set-PSGlobalProfile function -> Rename to Set-PSProfileSource
+function Set-PSProfileSource {
     [CmdletBinding()]
     param (
         [string]$Url,
-        [string]$LocalPath,
-        [switch]$Verbose
+        [string]$LocalPath
     )
 
     if ($Url) {
         $profileSource = $Url
-        if ($Verbose) {
-            Write-Verbose "Profile source set to URL: $Url"
-        }
+        Write-Verbose "Profile source set to URL: $Url"
     } elseif ($LocalPath) {
         if (-not (Test-Path $LocalPath)) {
             Write-Error "Local path not found: $LocalPath"
             return
         }
         $profileSource = $LocalPath
-        if ($Verbose) {
-            Write-Verbose "Profile source set to local path: $LocalPath"
-        }
+        Write-Verbose "Profile source set to local path: $LocalPath"
     } else {
         Write-Error "No source specified. Use -Url or -LocalPath."
         return
@@ -67,99 +59,82 @@ function Set-PSGlobalProfile {
     $script:profileSource = $profileSource
 }
 
-# Load-PSGlobalProfile function
-function Load-PSGlobalProfile {
+# Load-PSGlobalProfile function -> Rename to Import-PSProfile
+function Import-PSProfile {
     [CmdletBinding()]
     param (
-        [switch]$FromUrl,
-        [switch]$FromLocal,
+        [string]$FromUrl,
+        [string]$FromLocal,
         [switch]$Overwrite,
         [switch]$Append,
         [switch]$Reload,
-        [switch]$Backup,
-        [switch]$Verbose
+        [switch]$Backup
     )
 
-    if (-not $script:profileSource) {
-        Write-Error "Profile source not set. Use Set-PSGlobalProfile first."
+    if ($FromUrl) {
+        $script:profileSource = $FromUrl
+    } elseif ($FromLocal) {
+        if (-not (Test-Path $FromLocal)) {
+            Write-Error "Local profile path not found: $FromLocal"
+            return
+        }
+        $script:profileSource = $FromLocal
+    } else {
+        Write-Error "Specify either -FromUrl or -FromLocal."
         return
     }
 
     if ($Backup) {
-        Backup-PSGlobalProfile -Verbose:$Verbose
+        Backup-PSProfile
     }
 
-    if ($FromUrl) {
-        try {
-            $profileContent = Invoke-WebRequest -Uri $script:profileSource -UseBasicParsing -ErrorAction Stop
-            if ($Verbose) {
-                Write-Verbose "Profile content retrieved from URL."
-            }
-        } catch {
-            Write-Error "Failed to retrieve profile from URL: $_"
-            return
+    try {
+        $profileContent = if ($FromUrl) {
+            Invoke-WebRequest -Uri $script:profileSource -UseBasicParsing -ErrorAction Stop | Select-Object -ExpandProperty Content
+        } else {
+            Get-Content -Path $script:profileSource -Raw
         }
-    } elseif ($FromLocal) {
-        if (-not (Test-Path $script:profileSource)) {
-            Write-Error "Local profile path not found: $script:profileSource"
-            return
-        }
-        $profileContent = Get-Content -Path $script:profileSource -Raw
-        if ($Verbose) {
-            Write-Verbose "Profile content retrieved from local path."
-        }
-    } else {
-        Write-Error "Specify -FromUrl or -FromLocal."
+        Write-Verbose "Profile content retrieved from $script:profileSource."
+    } catch {
+        Write-Error "Failed to retrieve profile from $script:profileSource: $_"
         return
     }
 
-    if (Test-PSGlobalProfile) {
+    if (Test-PSProfile) {
         if ($Overwrite) {
             Set-Content -Path $PROFILE -Value $profileContent -Force
-            if ($Verbose) {
-                Write-Verbose "Profile overwritten at $PROFILE"
-            }
+            Write-Verbose "Profile overwritten at $PROFILE"
         } elseif ($Append) {
             Add-Content -Path $PROFILE -Value $profileContent
-            if ($Verbose) {
-                Write-Verbose "Profile content appended at $PROFILE"
-            }
+            Write-Verbose "Profile content appended at $PROFILE"
         } else {
             Write-Error "Profile already exists. Use -Overwrite or -Append."
             return
         }
     } else {
         Set-Content -Path $PROFILE -Value $profileContent -Force
-        if ($Verbose) {
-            Write-Verbose "New profile created and content set at $PROFILE"
-        }
+        Write-Verbose "New profile created and content set at $PROFILE"
     }
 
     if ($Reload) {
         . $PROFILE
-        if ($Verbose) {
-            Write-Verbose "Profile reloaded into the current session."
-        }
+        Write-Verbose "Profile reloaded into the current session."
     }
 }
 
-# Backup-PSGlobalProfile function
-function Backup-PSGlobalProfile {
+# Backup-PSGlobalProfile function -> Rename to Backup-PSProfile
+function Backup-PSProfile {
     [CmdletBinding()]
-    param (
-        [switch]$Verbose
-    )
+    param ()
 
-    if (Test-PSGlobalProfile) {
+    if (Test-PSProfile) {
         $backupPath = "$PROFILE.bak_$(Get-Date -Format 'yyyyMMddHHmmss')"
         Copy-Item -Path $PROFILE -Destination $backupPath -Force
-        if ($Verbose) {
-            Write-Verbose "Profile backed up to $backupPath"
-        }
+        Write-Verbose "Profile backed up to $backupPath"
     } else {
         Write-Verbose "No existing profile to back up."
     }
 }
 
 # Export the module functions
-Export-ModuleMember -Function New-PSGlobalProfile, Test-PSGlobalProfile, Set-PSGlobalProfile, Load-PSGlobalProfile, Backup-PSGlobalProfile
+Export-ModuleMember -Function New-PSProfile, Test-PSProfile, Set-PSProfileSource, Import-PSProfile, Backup-PSProfile

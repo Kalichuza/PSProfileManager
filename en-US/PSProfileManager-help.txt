@@ -1,28 +1,24 @@
 Help file for PSProfileManager module
 -------------------------------------
 
-Function: New-PSGlobalProfile
+Function: New-PSProfile
 Syntax: 
-  New-PSGlobalProfile [-Force] [-Verbose]
+  New-PSProfile [-Force]
 Description:
   Creates a new PowerShell profile if one does not exist.
   
   -Force:
     Forces the creation of a new profile script without confirmation.
-  
-  -Verbose:
-    Provides detailed output of the process.
 
-
-Function: Test-PSGlobalProfile
+Function: Test-PSProfile
 Syntax:
-  Test-PSGlobalProfile
+  Test-PSProfile
 Description:
   Checks if a PowerShell profile exists.
 
-Function: Set-PSGlobalProfile
+Function: Set-PSProfileSource
 Syntax:
-  Set-PSGlobalProfile [-Url <string>] [-LocalPath <string>] [-Verbose]
+  Set-PSProfileSource [-Url <string>] [-LocalPath <string>]
 Description:
   Sets the source of the PowerShell profile, either from a URL or local path.
 
@@ -32,43 +28,11 @@ Description:
   -LocalPath:
     The local file path to the profile.
 
-  -Verbose:
-    Provides detailed output of the process.
-
-
-Function: Load-PSGlobalProfile
+Function: Import-PSProfile
 Syntax:
-  Load-PSGlobalProfile [-FromUrl] [-FromLocal] [-Overwrite] [-Append] [-Reload] [-Backup] [-Verbose]
+  Import-PSProfile [-FromUrl <string>] [-FromLocal <string>] [-Overwrite] [-Append] [-Reload] [-Backup]
 Description:
   Loads the profile from the specified source and applies it to the current session.
 
   -FromUrl:
-    Loads the profile from the stored URL.
-
-  -FromLocal:
-    Loads the profile from the stored local path.
-
-  -Overwrite:
-    Overwrites the existing profile with the new content.
-
-  -Append:
-    Appends the new content to the existing profile.
-
-  -Reload:
-    Reloads the profile into the current session.
-
-  -Backup:
-    Backs up the existing profile before making changes.
-
-  -Verbose:
-    Provides detailed output of the process.
-
-
-Function: Backup-PSGlobalProfile
-Syntax:
-  Backup-PSGlobalProfile [-Verbose]
-Description:
-  Backs up the existing PowerShell profile before making changes.
-
-  -Verbose:
-    Provides detailed output of the process.
+    The
